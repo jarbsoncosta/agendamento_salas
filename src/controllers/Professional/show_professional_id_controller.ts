@@ -5,10 +5,10 @@ import { Request, Response } from "express";
 
 export class ShowProfessionalController {
   async handle(request: Request, response: Response) {
-    const { cpf } = request.body
+    const { email } = request.body
     const service = new ShowProfessionalIdService()
 
-    const res = await service.execute(cpf)
+    const res = await service.execute(email)
 
     return response.status(201).json(res)
   }

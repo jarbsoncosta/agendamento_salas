@@ -3,13 +3,13 @@ import db from '../../config/db'
 //import AppError from 'src/error/AppError';
 
 export class ShowProfessionalIdService {
-  async execute(cpf: string) {
-    db.query('SELECT nome FROM tb_profissional WHERE cpf = $1', [cpf], (error, results) => {
+  async execute(email: string) {
+  const response = await db.query('SELECT name FROM professional WHERE email = $1', [email],  (error, results)  => {
       if (error) {
         throw error
-      }
-      return results.rows[0]
+      }          
     })
-    
+    return response.rows
   }
+
 }

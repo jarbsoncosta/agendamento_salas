@@ -2,10 +2,29 @@ generator client {
   provider = "prisma-client-js"
 }
 
-//datasource db {
-  //provider = "postgresql"
- //url      = env("DATABASE_URL")
-//}
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  password  String
+  createdAt DateTime @default(now())
+
+  @@map("admin")
+}
+model Professional {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  password  String
+  createdAt DateTime @default(now())
+
+  @@map("professional")
+}
 
 //tabela de inspetorias
 model Inspectorate {

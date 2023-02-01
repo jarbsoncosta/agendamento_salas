@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//tabela de inspetorias
+model Inspectorate {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  rooms       Room[]
+
+  @@map("inspectorate")
+}
+
+//tabela de salas
+model Room {
+  id           String  @id @default(uuid())
+  name         String
+  description  String?
+  inspetoriaId String
+
+  inspectorates Inspectorate @relation(fields: [inspetoriaId], references: [id])
+
+  @@map("room")
+}

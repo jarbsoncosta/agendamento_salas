@@ -4,6 +4,7 @@ import { CreateInspectorateController } from '@controllers/Inspectorate/create_I
 import { CreateRoomController } from '@controllers/Inspectorate/create_room_controller'
 import { ListInspectorateController } from '@controllers/Inspectorate/list_Inspectorate_controller'
 import { ShowInspectorateController } from '@controllers/Inspectorate/show_Inspectorate_id_controller'
+import { ShowProfessionalController } from '@controllers/Professional/show_professional_id_controller'
 import { Router } from 'express'
 
 //import { userAuthenticate } from 'src/middlewares/userAuthenticate'
@@ -15,6 +16,8 @@ inspectorateRouter.get("/:id", new ShowInspectorateController().handle)
 inspectorateRouter.post("/", new CreateInspectorateController().handle)
 inspectorateRouter.post("/room", new CreateRoomController().handle)
 //inspectorateRouter.post('/session', new AuthenticateController().handle)
+
+inspectorateRouter.get("/professional", new ShowProfessionalController().handle)
 
 
 export default inspectorateRouter

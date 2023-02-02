@@ -40,5 +40,25 @@ CREATE TABLE "room" (
     CONSTRAINT "room_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "scheduling" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "professionalId" TEXT NOT NULL,
+    "inspectorateId" TEXT NOT NULL,
+    "dateInitial" TIMESTAMP(3) NOT NULL,
+    "dateFinish" TIMESTAMP(3) NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'agendamento pendente',
+    "messageStatus" TEXT,
+
+    CONSTRAINT "scheduling_pkey" PRIMARY KEY ("id")
+);
+
 -- AddForeignKey
 ALTER TABLE "room" ADD CONSTRAINT "room_inspetoriaId_fkey" FOREIGN KEY ("inspetoriaId") REFERENCES "inspectorate"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "scheduling" ADD CONSTRAINT "scheduling_professionalId_fkey" FOREIGN KEY ("professionalId") REFERENCES "professional"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "scheduling" ADD CONSTRAINT "scheduling_inspectorateId_fkey" FOREIGN KEY ("inspectorateId") REFERENCES "inspectorate"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

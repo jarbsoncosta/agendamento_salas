@@ -7,6 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//tabela de admnistrador
 model Admin {
   id        String   @id @default(uuid())
   name      String
@@ -16,12 +17,16 @@ model Admin {
 
   @@map("admin")
 }
+
+//tabela de profissional
 model Professional {
   id        String   @id @default(uuid())
   name      String
   email     String
   password  String
   createdAt DateTime @default(now())
+
+  schedules Scheduling[]
 
   @@map("professional")
 }
@@ -32,7 +37,9 @@ model Inspectorate {
   name        String
   description String?
   createdAt   DateTime @default(now())
-  rooms       Room[]
+
+  rooms     Room[]
+  schedules Scheduling[]
 
   @@map("inspectorate")
 }
@@ -47,4 +54,21 @@ model Room {
   inspectorates Inspectorate @relation(fields: [inspetoriaId], references: [id])
 
   @@map("room")
+}
+
+//tabela de agendamento de sala
+model Scheduling {
+  id             String   @id @default(uuid())
+  title         String
+  professionalId String
+  inspectorateId String
+  dateInitial    DateTime
+  dateFinish     DateTime
+  status String @default("agendamento pendente")
+  messageStatus String?
+
+  professional Professional @relation(fields: [professionalId], references: [id])
+  inspectorate Inspectorate @relation(fields: [inspectorateId], references: [id])
+
+  @@map("scheduling")
 }

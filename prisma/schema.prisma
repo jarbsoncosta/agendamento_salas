@@ -9,10 +9,14 @@ datasource db {
 
 //tabela de admnistrador
 model Admin {
-  id        String   @id @default(uuid())
-  name      String
-  email     String
-  password  String
+  id       String @id @default(uuid())
+  name     String
+  email    String
+  password String
+
+  schedules    Scheduling[]
+  professional Professional[]
+
   createdAt DateTime @default(now())
 
   @@map("admin")
@@ -20,13 +24,15 @@ model Admin {
 
 //tabela de profissional
 model Professional {
-  id        String   @id @default(uuid())
-  name      String
-  email     String
-  password  String
-  createdAt DateTime @default(now())
-
-  schedules Scheduling[]
+  id                String       @id @default(uuid())
+  name              String
+  cpf               String
+  professionalTitle String
+  password          String
+  createdAt         DateTime     @default(now())
+  adminId           String?
+  schedules         Scheduling[]
+  Admin             Admin?       @relation(fields: [adminId], references: [id])
 
   @@map("professional")
 }
@@ -59,16 +65,18 @@ model Room {
 //tabela de agendamento de sala
 model Scheduling {
   id             String   @id @default(uuid())
-  title         String
+  title          String
   professionalId String
   inspectorateId String
   dateInitial    DateTime
   dateFinish     DateTime
-  status String @default("agendamento pendente")
-  messageStatus String?
+  status         String   @default("agendamento pendente")
+  messageStatus  String?
+  adminId        String?
 
   professional Professional @relation(fields: [professionalId], references: [id])
   inspectorate Inspectorate @relation(fields: [inspectorateId], references: [id])
+  Admin        Admin?       @relation(fields: [adminId], references: [id])
 
   @@map("scheduling")
 }

@@ -8,26 +8,26 @@ import AppError from "src/error/AppError";
 
 type AuthenticationParams = {
   password: string;
-  email: string;
+  cpf: string;
 };
 
 type AuthenticationResponse = {
   professional: {
     id: string;
     name: string;
-    email: string;    
+      
   };
   token: string;
 };
 
 export class AuthenticateProfessionalService {
   async execute(authenticateParams: AuthenticationParams): Promise<AuthenticationResponse> {
-    const { email, password } = authenticateParams;
+    const { cpf, password } = authenticateParams;
 
     const professional = await prisma.professional.findFirst({
       where: {
-        email: {
-          equals: email,
+        cpf: {
+          equals: cpf,
           mode: 'insensitive'
         }
       }
@@ -51,8 +51,7 @@ export class AuthenticateProfessionalService {
 			professional: {
 				id: professional.id,
 				name: professional.name,
-				email: professional.email,
-              
+				              
 			},
 			token
 		};

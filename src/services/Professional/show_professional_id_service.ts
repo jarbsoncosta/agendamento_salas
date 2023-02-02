@@ -1,6 +1,6 @@
 import db from '../../config/db'
 
-//import AppError from 'src/error/AppError';
+import AppError from 'src/error/AppError';
 
 export class ShowProfessionalIdService {
   async execute(cpf: string) {
@@ -8,9 +8,11 @@ export class ShowProfessionalIdService {
   'WHERE cpf = $1', [cpf],  (error, results)  => {
       if (error) {
         throw error
-      }          
+      }         
     })
-
+    if(!response.rows[0]){
+      throw new AppError("Profissional não encontrado")
+    }
     return response.rows
     
   }

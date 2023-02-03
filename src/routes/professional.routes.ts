@@ -9,7 +9,7 @@ import { Router } from 'express'
 const professionalRouter = Router()
 professionalRouter.post('/session', new AuthenticateProfessionalController().handle)
 professionalRouter.post("/", new CreateProfessionalController().handle)
-professionalRouter.get("/show", new ShowProfessionalController().handle)
+professionalRouter.get("/:cpf", new ShowProfessionalController().handle)
 
 
 export default professionalRouter

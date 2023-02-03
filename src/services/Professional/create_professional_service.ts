@@ -17,7 +17,7 @@ export class CreateProfessionalService {
       where: { cpf }
     })
     if (professionalExists) {
-      throw new AppError("Usuário já cadastrado no sistema")
+      throw new AppError("Cpf já cadastrado no sistema")
     }
     if (confirmPassword !== password) {
       throw new AppError('Confirmação de senha não confere!')

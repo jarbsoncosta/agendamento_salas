@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 
 export class ShowProfessionalController {
   async handle(request: Request, response: Response) {
-    const { cpf } = request.body
+    const { cpf } = request.params
     const service = new ShowProfessionalIdService()
 
     const res = await service.execute(cpf)

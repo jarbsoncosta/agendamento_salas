@@ -2,13 +2,12 @@ declare namespace Express{
     // eslint-disable-next-line @typescript-eslint/naming-convention
 
     export interface Request{
-      professional: {
+      user: {
            id:string;
         },
         admin:{
           id:string
         }
-
 
     }
 }

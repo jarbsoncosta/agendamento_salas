@@ -11,7 +11,12 @@ export class ShowInspectorateIdService {
         id
       },
       include: {
-        rooms: true
+        rooms: {
+          include:{
+            hours:true
+          }
+        },
+
       }
     })
     return inspectorate

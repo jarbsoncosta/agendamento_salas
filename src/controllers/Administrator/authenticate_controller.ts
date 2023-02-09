@@ -1,4 +1,4 @@
-import { AuthenticateAdminService } from '@models/Administrator/authenticate_service'
+import { AuthenticateAdminService } from '../../services/Administrator/authenticate_service'
 
 import { Request, Response } from 'express'
 

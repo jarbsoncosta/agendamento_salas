@@ -9,11 +9,10 @@ datasource db {
 
 //tabela de admnistrador
 model Admin {
-  id       String @id @default(uuid())
-  name     String
-  email    String
-  password String
-
+  id           String         @id @default(uuid())
+  name         String
+  email        String
+  password     String
   schedules    Scheduling[]
   professional Professional[]
 
@@ -27,6 +26,7 @@ model Professional {
   id                String       @id @default(uuid())
   name              String
   cpf               String
+  email             String
   professionalTitle String
   password          String
   createdAt         DateTime     @default(now())
@@ -59,24 +59,42 @@ model Room {
 
   inspectorates Inspectorate @relation(fields: [inspetoriaId], references: [id])
 
+  hours      Hour[]
+  scheduling Scheduling[]
+
   @@map("room")
+}
+
+//tabela horas das salas
+model Hour {
+  id       String @id @default(uuid())
+  hInitial Int?
+  hFinal   Int?
+  roomId   String
+  
+  room Room @relation(fields: [roomId], references: [id])
+
+  @@map("hour")
 }
 
 //tabela de agendamento de sala
 model Scheduling {
-  id             String   @id @default(uuid())
+  id             String  @id @default(uuid())
   title          String
   professionalId String
   inspectorateId String
-  dateInitial    DateTime
-  dateFinish     DateTime
-  status         String   @default("agendamento pendente")
+  hourInitial    Int
+  hourFinish     Int
+  status         String  @default("Agendamento pendente")
   messageStatus  String?
   adminId        String?
+  roomId         String
+  createdAt      String
 
   professional Professional @relation(fields: [professionalId], references: [id])
   inspectorate Inspectorate @relation(fields: [inspectorateId], references: [id])
-  Admin        Admin?       @relation(fields: [adminId], references: [id])
+  admin        Admin?       @relation(fields: [adminId], references: [id])
+  room         Room         @relation(fields: [roomId], references: [id])
 
   @@map("scheduling")
 }

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { Secret, verify } from "jsonwebtoken";
-import AppError from "src/error/AppError";
+import AppError from "../error/AppError";
 
 
 interface IPayload {

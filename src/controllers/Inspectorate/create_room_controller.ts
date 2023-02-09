@@ -1,5 +1,5 @@
 
-import { CreateRoomService } from "@models/Inspectorate/create_room_service";
+import { CreateRoomService } from "../../services/Inspectorate/create_room_service";
 import { Request, Response } from "express";
 
 

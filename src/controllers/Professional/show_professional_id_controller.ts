@@ -1,5 +1,5 @@
 
-import { ShowProfessionalIdService } from "@models/Professional/show_professional_id_service";
+import { ShowProfessionalIdService } from "../../services/Professional/show_professional_id_service";
 import { Request, Response } from "express";
 
 

@@ -1,6 +1,6 @@
 import { prisma } from '@config/prisma'
 import { Admin } from '@prisma/client'
-import AppError from 'src/error/AppError';
+import AppError from '../../error/AppError';
 import { hash } from 'bcrypt'
 
 interface AdminProps{

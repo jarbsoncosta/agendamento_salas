@@ -1,6 +1,6 @@
 
-import { AuthenticateAdminController } from '@controllers/Administrator/authenticate_controller'
-import { CreateAdminController } from '@controllers/Administrator/create_admin_controller'
+import { AuthenticateAdminController } from '../controllers/Administrator/authenticate_controller'
+import { CreateAdminController } from '../controllers/Administrator/create_admin_controller'
 import { Router } from 'express'
 
 const adminRouter = Router()

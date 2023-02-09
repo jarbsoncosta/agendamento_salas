@@ -2,7 +2,7 @@
 import { prisma } from "@config/prisma";
 import { compare } from "bcrypt";
 import { Secret, sign } from 'jsonwebtoken';
-import AppError from "src/error/AppError";
+import AppError from "../../error/AppError";
 
 
 
@@ -52,6 +52,7 @@ export class AuthenticateAdminService {
 				id: admin.id,
 				name: admin.name,
 				email: admin.email,
+        
               
 			},
 			token

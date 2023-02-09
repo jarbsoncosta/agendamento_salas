@@ -1,6 +1,6 @@
 
 
-import { AuthenticateProfessionalService } from '@models/Professional/authenticate_service'
+import { AuthenticateProfessionalService } from '../../services/Professional/authenticate_service'
 import { Request, Response } from 'express'
 
 export class AuthenticateProfessionalController {

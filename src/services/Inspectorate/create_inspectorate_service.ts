@@ -2,7 +2,7 @@
 import { prisma } from '@config/prisma'
 import { Inspectorate } from '@prisma/client';
 
-import AppError from 'src/error/AppError';
+//import AppError from 'src/error/AppError';
 
 
 interface DataInspectorate{

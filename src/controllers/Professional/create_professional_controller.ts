@@ -1,4 +1,4 @@
-import { CreateProfessionalService } from "@models/Professional/create_professional_service";
+import { CreateProfessionalService } from "../../services/Professional/create_professional_service";
 import { Request, Response } from "express";
 
 

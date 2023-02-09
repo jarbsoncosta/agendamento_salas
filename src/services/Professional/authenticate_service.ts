@@ -2,7 +2,7 @@
 import { prisma } from "@config/prisma";
 import { compare } from "bcrypt";
 import { Secret, sign } from 'jsonwebtoken';
-import AppError from "src/error/AppError";
+import AppError from "../../error/AppError";
 
 
 
@@ -12,9 +12,10 @@ type AuthenticationParams = {
 };
 
 type AuthenticationResponse = {
-  professional: {
+  user: {
     id: string;
     name: string;
+    cpf:string
       
   };
   token: string;
@@ -24,7 +25,7 @@ export class AuthenticateProfessionalService {
   async execute(authenticateParams: AuthenticationParams): Promise<AuthenticationResponse> {
     const { cpf, password } = authenticateParams;
 
-    const professional = await prisma.professional.findFirst({
+    const user = await prisma.professional.findFirst({
       where: {
         cpf: {
           equals: cpf,
@@ -33,24 +34,25 @@ export class AuthenticateProfessionalService {
       }
     })
 
-    if (!professional) {
+    if (!user) {
       throw new AppError("Não autorizado", 401);
     }
 
-    const passwordMatch = await compare(password, professional.password);
+    const passwordMatch = await compare(password, user.password);
     if (!passwordMatch) {
       throw new AppError("Não autorizado", 401);
     }
 
     const token = sign({}, process.env.JWT_SECRET as Secret, {
-			subject: professional.id,
+			subject: user.id,
 			expiresIn: process.env.JWT_EXPIRES_IN
 		});
 
     const tokenReturn: AuthenticationResponse = {
-			professional: {
-				id: professional.id,
-				name: professional.name,
+			user: {
+				id: user.id,
+				name: user.name,
+        cpf:user.cpf
 				              
 			},
 			token

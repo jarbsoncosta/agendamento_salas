@@ -1,4 +1,4 @@
-import { CreateAdminService } from "@models/Administrator/create_admin_service";
+import { CreateAdminService } from "../../services/Administrator/create_admin_service";
 import { Request, Response } from "express";
 
 

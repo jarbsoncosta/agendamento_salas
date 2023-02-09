@@ -1,5 +1,5 @@
 
-import { ListInspectoratesService } from "@models/Inspectorate/list_inspectorates_service";
+import { ListInspectoratesService } from "../../services/Inspectorate/list_inspectorates_service";
 import { Request, Response } from "express";
 
 

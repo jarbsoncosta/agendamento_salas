@@ -3,11 +3,13 @@ import { AuthenticateProfessionalController } from '../controllers/Professional/
 import { CreateProfessionalController } from '../controllers/Professional/create_professional_controller'
 import { ShowProfessionalController } from '../controllers/Professional/show_professional_id_controller'
 import { Router } from 'express'
+import { ForgotPasswordController } from '../controllers/Professional/forgot_password_controller'
 
 //import { userAuthenticate } from 'src/middlewares/userAuthenticate'
 
 const professionalRouter = Router()
 professionalRouter.post('/session', new AuthenticateProfessionalController().handle)
+professionalRouter.post('/forgotPassword', new ForgotPasswordController().handle)
 professionalRouter.post("/", new CreateProfessionalController().handle)
 professionalRouter.get("/:cpf", new ShowProfessionalController().handle)
 

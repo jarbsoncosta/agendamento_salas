@@ -26,10 +26,10 @@ export class CreateProfessionalService {
       where: { cpf }
     })
     if (professionalExists) {
-      throw new AppError("Cpf já cadastrado no sistema")
+      throw new AppError("Cpf já cadastrado no sistema !")
     }
     if (confirmPassword !== password) {
-      throw new AppError('Confirmação de senha não confere!')
+      throw new AppError('Confirmação de senha não confere !')
     }
     
     const hashedPassword = await hash(password, 8)

@@ -73,7 +73,7 @@ export class ShowProfessionalIdService {
       }   
     })
     if (!res.rows[0]) {
-      throw new AppError("Profissional não encontrado")
+      throw new AppError("Profissional não encontrado !")
     }
     return res.rows
   };

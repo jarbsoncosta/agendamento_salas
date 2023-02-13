@@ -5,12 +5,14 @@ import { Router } from 'express'
 import { professionalAuthenticate } from '../middlewares/professionalAuthenticate'
 import { ListAllSchedulingAdminController } from '@controllers/Scheduling/list_all_scheduling_contoller_admin'
 import { UpdateSchedulingController } from '@controllers/Scheduling/update_scheduling_controller'
+import { CanceLSchedulingProfessionalIdController } from '@controllers/Scheduling/cancel_scheduling_professional_id_controller copy'
 
 const schedulingRouter = Router()
 schedulingRouter.post("/", professionalAuthenticate, new CreateSchedulingController().handle)
 schedulingRouter.get("/", professionalAuthenticate, new ListAllSchedulingController().handle)
 schedulingRouter.get("/admin", new ListAllSchedulingAdminController().handle)
 schedulingRouter.put("/status/:id", new UpdateSchedulingController().handle)
+schedulingRouter.patch("/cancel/:professionalId",professionalAuthenticate, new CanceLSchedulingProfessionalIdController().handle)
 
 
 

@@ -4,6 +4,8 @@ import { CreateProfessionalController } from '../controllers/Professional/create
 import { ShowProfessionalController } from '../controllers/Professional/show_professional_id_controller'
 import { Router } from 'express'
 import { ForgotPasswordController } from '../controllers/Professional/forgot_password_controller'
+import { ShowProfileProfessionalController } from '@controllers/Professional/show_profile_professional_controller'
+import { professionalAuthenticate } from 'src/middlewares/professionalAuthenticate'
 
 //import { userAuthenticate } from 'src/middlewares/userAuthenticate'
 
@@ -13,5 +15,6 @@ professionalRouter.post('/forgotPassword', new ForgotPasswordController().handle
 professionalRouter.post("/", new CreateProfessionalController().handle)
 professionalRouter.get("/:cpf", new ShowProfessionalController().handle)
 
+professionalRouter.get("/", professionalAuthenticate, new ShowProfileProfessionalController().handle)
 
 export default professionalRouter

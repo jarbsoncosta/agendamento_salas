@@ -8,7 +8,6 @@ import schedulingRouter from './scheduling.routes'
 
 const routes = Router()
 
-
 routes.use("/api/inspectorate", inspectorateRouter)
 routes.use("/api/professional", professionalRouter)
 routes.use("/api/scheduling", schedulingRouter)

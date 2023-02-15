@@ -12,7 +12,7 @@ type AuthenticationParams = {
 };
 
 type AuthenticationResponse = {
-  userAdmin: {
+  admin: {
     id: string;
     name: string;
     email: string;    
@@ -48,7 +48,7 @@ export class AuthenticateAdminService {
 		});
 
     const tokenReturn: AuthenticationResponse = {
-			userAdmin: {
+			admin: {
 				id: admin.id,
 				name: admin.name,
 				email: admin.email,

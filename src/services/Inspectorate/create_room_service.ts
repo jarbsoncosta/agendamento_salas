@@ -1,4 +1,3 @@
-
 import { prisma } from '@config/prisma'
 import { Room } from '@prisma/client';
 

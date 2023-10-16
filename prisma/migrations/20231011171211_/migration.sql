@@ -57,7 +57,8 @@ CREATE TABLE "hour" (
 CREATE TABLE "scheduling" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "professionalId" TEXT NOT NULL,
+    "nameProfissional" TEXT NOT NULL,
+    "cpfProfissional" TEXT NOT NULL,
     "inspectorateId" TEXT NOT NULL,
     "hourInitial" INTEGER NOT NULL,
     "hourFinish" INTEGER NOT NULL,
@@ -78,9 +79,6 @@ ALTER TABLE "room" ADD CONSTRAINT "room_inspetoriaId_fkey" FOREIGN KEY ("inspeto
 
 -- AddForeignKey
 ALTER TABLE "hour" ADD CONSTRAINT "hour_roomId_fkey" FOREIGN KEY ("roomId") REFERENCES "room"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "scheduling" ADD CONSTRAINT "scheduling_professionalId_fkey" FOREIGN KEY ("professionalId") REFERENCES "professional"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "scheduling" ADD CONSTRAINT "scheduling_inspectorateId_fkey" FOREIGN KEY ("inspectorateId") REFERENCES "inspectorate"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

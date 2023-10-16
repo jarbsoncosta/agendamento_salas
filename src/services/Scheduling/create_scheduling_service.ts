@@ -6,7 +6,8 @@ import AppError from '../../error/AppError';
 
 interface SchedulingProps {
   title: string;
-  professionalId: string;
+  nameProfissional: string;
+  cpfProfissional:string;
   inspectorateId: string;
   hourInitial: number,
   hourFinish: number,
@@ -21,7 +22,8 @@ export class CreateSchedulingService {
     hourInitial,
     hourFinish,
     createdAt,
-    professionalId,
+    nameProfissional,
+    cpfProfissional,
     inspectorateId,
     roomId,
     status,
@@ -30,20 +32,26 @@ export class CreateSchedulingService {
 
     const schedulingExists = await prisma.scheduling.findMany()
     const diaExistente = schedulingExists.find(element => element.createdAt === createdAt);  
-    const horaExistente =  schedulingExists.find(element => String(element.hourInitial) === String(hourInitial))
+    const horaExistenteInicial =  schedulingExists.find(element => element.hourInitial === (hourInitial))
+    const horaExistenteFinal =  schedulingExists.find(element => element.hourFinish === (hourFinish))
     const sala = schedulingExists.find(element => element.roomId === roomId)
+
+    console.log(horaExistenteInicial?.hourFinish, horaExistenteFinal?.hourFinish)
+
   
-    if( diaExistente && horaExistente && sala){
+    if( diaExistente && horaExistenteInicial && sala){
       throw new AppError("Já existe um agendamento para esta sala e horário ")
     }
 
+   
     const scheduling = await prisma.scheduling.create({
       data: {
         title,
         hourInitial,
         hourFinish,
         createdAt,
-        professionalId,
+        cpfProfissional,
+        nameProfissional,
         inspectorateId,
         roomId,
         status,

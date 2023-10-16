@@ -8,9 +8,9 @@ import { UpdateSchedulingController } from '@controllers/Scheduling/update_sched
 import { CanceLSchedulingProfessionalIdController } from '@controllers/Scheduling/cancel_scheduling_professional_id_controller copy'
 
 const schedulingRouter = Router()
-schedulingRouter.post("/", professionalAuthenticate, new CreateSchedulingController().handle)
-schedulingRouter.get("/", professionalAuthenticate, new ListAllSchedulingController().handle)
-schedulingRouter.get("/admin", new ListAllSchedulingAdminController().handle)
+schedulingRouter.post("/",new CreateSchedulingController().handle)
+schedulingRouter.get("/:cpfProfissional", new ListAllSchedulingController().handle)
+schedulingRouter.get("/", new ListAllSchedulingAdminController().handle)
 schedulingRouter.put("/status/:id", new UpdateSchedulingController().handle)
 schedulingRouter.patch("/cancel/:professionalId",professionalAuthenticate, new CanceLSchedulingProfessionalIdController().handle)
 

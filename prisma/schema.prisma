@@ -31,7 +31,7 @@ model Professional {
   password          String
   createdAt         DateTime     @default(now())
   adminId           String?
-  schedules         Scheduling[]
+ // schedules         Scheduling[]
   Admin             Admin?       @relation(fields: [adminId], references: [id])
 
   @@map("professional")
@@ -81,7 +81,8 @@ model Hour {
 model Scheduling {
   id             String  @id @default(uuid())
   title          String
-  professionalId String
+  nameProfissional String
+  cpfProfissional String
   inspectorateId String
   hourInitial    Int
   hourFinish     Int
@@ -90,8 +91,7 @@ model Scheduling {
   adminId        String?
   roomId         String
   createdAt      String
-
-  professional Professional @relation(fields: [professionalId], references: [id])
+ 
   inspectorate Inspectorate @relation(fields: [inspectorateId], references: [id])
   admin        Admin?       @relation(fields: [adminId], references: [id])
   room         Room         @relation(fields: [roomId], references: [id])

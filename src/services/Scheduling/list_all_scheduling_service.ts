@@ -5,22 +5,17 @@ import AppError from '../../error/AppError';
 
 
 export class ListAllSchedulingService {
-  async execute(professionalId:string): Promise<Scheduling[]> {
-    const professional = await prisma.professional.findFirst({where:{id:professionalId}})
-    if (!professional){
-      throw new AppError("Profissional não encontrado")
-    }
+  async execute(cpfProfissional:string): Promise<Scheduling[]> {
 
     const shedulings = await prisma.scheduling.findMany({
       where:{
-        professionalId
+        cpfProfissional
       },
       include:{
         inspectorate:{
           select:{
             name:true
           }
-
         },
         room:{
           select:{
@@ -28,14 +23,7 @@ export class ListAllSchedulingService {
           }
         
         },
-        professional:{
-          select:{
-            name:true,
-            professionalTitle:true
-          }
-        }
-
-      }
+     }
     })
     return shedulings
   }

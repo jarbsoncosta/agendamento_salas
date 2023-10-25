@@ -7,21 +7,24 @@ interface SchedulingProps {
   id:string
   status: string;
   messageStatus: string
+  email:string
 }
 export class UpdateSchedulingService {
   async execute({
     id,
     title,
     status,
-    messageStatus
+    messageStatus,
+    email
   }: SchedulingProps): Promise<void> {
 
     const scheduling = await prisma.scheduling.findFirst({where:{id}})
+    const emailProfissional = email
 
     if(!scheduling){
       throw new AppError("Agendamento não encontrado")
     }
-     await prisma.scheduling.update({
+     const response = await prisma.scheduling.update({
       where:{
         id
       },
@@ -31,6 +34,8 @@ export class UpdateSchedulingService {
         messageStatus
       }
     })
+
+    console.log({data:{emailProfissional, response}})
    
   }
 }

@@ -4,10 +4,21 @@ import { ListAllSchedulingAdminService } from "@models/Scheduling/list_all_sched
 
 
 export class ListAllSchedulingAdminController{
-  async handle (request: Request, response:Response) {
-    const service = new ListAllSchedulingAdminService()
-     const res = await service.execute()
+  async handle(request: Request, response: Response) {
+    
+    const { options, inspectorateId, searchQuery,page } = request.query;
 
-    return response.status(201).json(res)
-  }
+    const service = new ListAllSchedulingAdminService();
+
+    let filters = { inspectorateId,searchQuery,page };
+
+    // Verifica se options está presente e parseia para objeto JSON
+    if (options) {
+      filters = JSON.parse(options as string);
+    }
+
+    const res = await service.execute(filters);
+
+    return response.status(200).json(res);
+  } 
 }

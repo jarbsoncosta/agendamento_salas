@@ -5,7 +5,6 @@ import { Secret, sign } from 'jsonwebtoken';
 import AppError from "../../error/AppError";
 
 
-
 type AuthenticationParams = {
   password: string;
   email: string;
@@ -15,7 +14,8 @@ type AuthenticationResponse = {
   admin: {
     id: string;
     name: string;
-    email: string;    
+    email: string; 
+    inspectorateId:string  
   };
   token: string;
 };
@@ -52,6 +52,7 @@ export class AuthenticateAdminService {
 				id: admin.id,
 				name: admin.name,
 				email: admin.email,
+        inspectorateId:admin.inspectorateId
         
               
 			},

@@ -7,10 +7,11 @@ interface AdminProps{
   name:string;
   email:string;
   password:string;
+  inspectorateId:string;
  
 }
 export class CreateAdminService {
-  async execute({ name, email, password }: AdminProps): Promise<Admin> {
+  async execute({ name, email, password,inspectorateId }: AdminProps): Promise<Admin> {
     const adminExists = await prisma.admin.findFirst({
       where: { email }
     })
@@ -23,7 +24,8 @@ export class CreateAdminService {
       data: {
         name,
         email,
-        password: hashedPassword,        
+        password: hashedPassword, 
+        inspectorateId       
       }
     })
     return admin

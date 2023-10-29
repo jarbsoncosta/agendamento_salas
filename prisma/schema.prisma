@@ -9,43 +9,44 @@ datasource db {
 
 //tabela de admnistrador
 model Admin {
-  id           String         @id @default(uuid())
-  name         String
-  email        String
-  password     String
-  schedules    Scheduling[]
-  professional Professional[]
-
-  createdAt DateTime @default(now())
+  id             String         @id @default(uuid())
+  name           String
+  email          String
+  password       String
+  schedules      Scheduling[]
+  professional   Professional[]
+  createdAt      DateTime       @default(now())
+  Inspectorate   Inspectorate?  @relation(fields: [inspectorateId], references: [id])
+  inspectorateId String?
 
   @@map("admin")
 }
 
 //tabela de profissional
 model Professional {
-  id                String       @id @default(uuid())
+  id                String   @id @default(uuid())
   name              String
   cpf               String
   email             String
   professionalTitle String
   password          String
-  createdAt         DateTime     @default(now())
+  createdAt         DateTime @default(now())
   adminId           String?
- // schedules         Scheduling[]
-  Admin             Admin?       @relation(fields: [adminId], references: [id])
+  // schedules         Scheduling[]
+  Admin             Admin?   @relation(fields: [adminId], references: [id])
 
   @@map("professional")
 }
 
 //tabela de inspetorias
 model Inspectorate {
-  id          String   @id @default(uuid())
+  id          String       @id @default(uuid())
   name        String
   description String?
-  createdAt   DateTime @default(now())
-
-  rooms     Room[]
-  schedules Scheduling[]
+  createdAt   DateTime     @default(now())
+  rooms       Room[]
+  schedules   Scheduling[]
+  admins      Admin[]
 
   @@map("inspectorate")
 }
@@ -71,7 +72,7 @@ model Hour {
   hInitial Int?
   hFinal   Int?
   roomId   String
-  
+
   room Room @relation(fields: [roomId], references: [id])
 
   @@map("hour")
@@ -79,19 +80,20 @@ model Hour {
 
 //tabela de agendamento de sala
 model Scheduling {
-  id             String  @id @default(uuid())
-  title          String
+  id               String  @id @default(uuid())
+  title            String
   nameProfissional String
-  cpfProfissional String
-  inspectorateId String
-  hourInitial    Int
-  hourFinish     Int
-  status         String  @default("Agendamento pendente")
-  messageStatus  String?
-  adminId        String?
-  roomId         String
-  createdAt      String
- 
+  cpfProfissional  String
+  emailProfissional String?
+  inspectorateId   String
+  hourInitial      Int
+  hourFinish       Int
+  status           String  @default("Agendamento pendente")
+  messageStatus    String?
+  adminId          String?
+  roomId           String
+  createdAt        String
+
   inspectorate Inspectorate @relation(fields: [inspectorateId], references: [id])
   admin        Admin?       @relation(fields: [adminId], references: [id])
   room         Room         @relation(fields: [roomId], references: [id])

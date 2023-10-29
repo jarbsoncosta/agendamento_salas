@@ -1,21 +1,21 @@
-
-import { prisma } from '@config/prisma'
-import { Scheduling } from '@prisma/client'
+import { prisma } from '@config/prisma';
+import { Scheduling } from '@prisma/client';
 import AppError from '../../error/AppError';
-
 
 interface SchedulingProps {
   title: string;
   nameProfissional: string;
-  cpfProfissional:string;
+  cpfProfissional: string;
   inspectorateId: string;
-  hourInitial: number,
-  hourFinish: number,
+  hourInitial: number;
+  hourFinish: number;
   roomId: string;
   status: string;
   createdAt: string;
-  messageStatus: string
+  messageStatus: string;
+  emailProfissional:string
 }
+
 export class CreateSchedulingService {
   async execute({
     title,
@@ -24,26 +24,42 @@ export class CreateSchedulingService {
     createdAt,
     nameProfissional,
     cpfProfissional,
+    emailProfissional,
     inspectorateId,
     roomId,
     status,
-    messageStatus
+    messageStatus,
   }: SchedulingProps): Promise<Scheduling> {
+    const existingSchedules = await prisma.scheduling.findMany({
+      where: {
+        createdAt: createdAt,
+        roomId: roomId,
+      },
+    });
 
-    const schedulingExists = await prisma.scheduling.findMany()
-    const diaExistente = schedulingExists.find(element => element.createdAt === createdAt);  
-    const horaExistenteInicial =  schedulingExists.find(element => element.hourInitial === (hourInitial))
-    const horaExistenteFinal =  schedulingExists.find(element => element.hourFinish === (hourFinish))
-    const sala = schedulingExists.find(element => element.roomId === roomId)
-
-    console.log(horaExistenteInicial?.hourFinish, horaExistenteFinal?.hourFinish)
-
-  
-    if( diaExistente && horaExistenteInicial && sala){
-      throw new AppError("Já existe um agendamento para esta sala e horário ")
+    for (let i = 0; i < existingSchedules.length; i++) {
+      const { hourInitial: existingInitial, hourFinish: existingFinish } = existingSchedules[i];
+    
+      // Verifica se o novo agendamento começa durante um agendamento existente
+      if (hourInitial >= existingInitial && hourInitial < existingFinish) {
+        throw new AppError(`Já existe um agendamento para esta sala no horário de ${existingInitial}h às ${existingFinish}h.`);
+      }
+    
+      // Verifica se o novo agendamento começa imediatamente após um agendamento existente
+      if (hourInitial === existingFinish) {
+        // Se houver um próximo agendamento
+        if (existingSchedules[i + 1]) {
+          const nextExistingInitial = existingSchedules[i + 1].hourInitial;
+          // Se o próximo agendamento começar imediatamente após este agendamento e houver menos de 1 hora de intervalo, bloqueie o agendamento
+          if (nextExistingInitial - hourFinish < 1) {
+            throw new AppError(`Já existe um agendamento neste intervalo. O próximo agendamento deve começar após as ${hourFinish}h.`);
+          }
+        }
+      }
     }
+    
+    
 
-   
     const scheduling = await prisma.scheduling.create({
       data: {
         title,
@@ -52,12 +68,13 @@ export class CreateSchedulingService {
         createdAt,
         cpfProfissional,
         nameProfissional,
+        emailProfissional,
         inspectorateId,
         roomId,
         status,
-        messageStatus
-      }
-    })
-    return scheduling
+        messageStatus,
+      },
+    });
+    return scheduling;
   }
 }

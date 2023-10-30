@@ -3,8 +3,11 @@ import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express'
 import AppError from './error/AppError'
 import routes from './routes'
+import ejs from 'ejs'
 
 const app = express()
+app.set('view engine', ejs);
+
 app.use(cors())
 app.use(express.json())
 app.use(routes)

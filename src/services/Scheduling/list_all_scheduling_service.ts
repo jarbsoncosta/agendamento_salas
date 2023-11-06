@@ -47,6 +47,9 @@ export class ListAllSchedulingService {
         inspectorate: true,
         room: true,
       },
+      orderBy:{
+        createdIn:"desc"
+      }
       
     });
 

@@ -20,28 +20,28 @@ export class ListAllSchedulingAdminService {
     const whereCondition: any = {
       inspectorateId,
     };
-
     
     if (searchQuery) {
+      const searchQueryLower = searchQuery.toUpperCase(); // Convertendo para minúsculas
       whereCondition.OR = [
         {
           nameProfissional: {
-            contains: searchQuery, // Filtra por nome do profissional que contém a searchQuery
+            contains: searchQueryLower, // Filtra por nome do profissional que contém a searchQuery
           },
         },
         {
           title: {
-            contains: searchQuery, // Filtra por título que contém a searchQuery
+            contains: searchQueryLower, // Filtra por título que contém a searchQuery
           },
         },
         {
           emailProfissional: {
-            contains: searchQuery, // Filtra por email que contém a searchQuery
+            contains: searchQueryLower, // Filtra por email que contém a searchQuery
           },
         },
         {
           createdAt: {
-            contains: searchQuery, // Filtra por data maior ou igual à searchQuery
+            contains: searchQueryLower, // Filtra por data maior ou igual à searchQuery
           },
         },
 

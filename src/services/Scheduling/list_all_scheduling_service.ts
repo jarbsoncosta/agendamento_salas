@@ -20,17 +20,18 @@ export class ListAllSchedulingService {
       cpfProfissional,
     };
 
-    
     if (searchQuery) {
+      const searchQueryLower = searchQuery.toUpperCase(); // Convertendo para minúsculas
+
       whereCondition.OR = [
         {
           title: {
-            contains: searchQuery, // Filtra por título que contém a searchQuery
+            contains: searchQueryLower, // Filtra por título que contém a searchQuery
           },
         },
         {
           createdAt: {
-            contains: searchQuery, // Filtra por data maior ou igual à searchQuery
+            contains: searchQueryLower, // Filtra por data maior ou igual à searchQuery
           },
         },
 

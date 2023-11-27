@@ -1,6 +1,6 @@
 
 import { Request, Response } from "express";
-import { ListAllSchedulingAdminService } from "@models/Scheduling/list_all_scheduling_admin_service";
+import { ListAllSchedulingAdminService } from "../../services/Scheduling/list_all_scheduling_admin_service";
 
 
 export class ListAllSchedulingAdminController{

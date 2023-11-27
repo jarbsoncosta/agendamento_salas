@@ -1,4 +1,4 @@
-import { ListAllSchedulingService } from "@models/Scheduling/list_all_scheduling_service";
+import { ListAllSchedulingService } from "../../services/Scheduling/list_all_scheduling_service";
 import { Request, Response } from "express";
 
 export class ListAllSchedulingController {

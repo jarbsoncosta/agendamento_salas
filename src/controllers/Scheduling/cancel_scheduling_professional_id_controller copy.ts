@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CancelSchedulingProfessionalIdService } from "@models/Scheduling/cancel_scheduling_professional_id";
+import { CancelSchedulingProfessionalIdService } from "../../services/Scheduling/cancel_scheduling_professional_id";
 
 
 export class CanceLSchedulingProfessionalIdController {

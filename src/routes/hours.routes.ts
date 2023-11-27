@@ -1,6 +1,6 @@
 
-import { ListAllHoursRoomsIdController } from '@controllers/Inspectorate/list_all_hours_room_contoller'
-import { ListHoursController } from '@controllers/Inspectorate/list_hours_controller'
+import { ListAllHoursRoomsIdController } from '../controllers/Inspectorate/list_all_hours_room_contoller'
+import { ListHoursController } from '../controllers/Inspectorate/list_hours_controller'
 import { Router } from 'express'
 
 

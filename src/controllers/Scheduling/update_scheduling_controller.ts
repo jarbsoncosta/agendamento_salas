@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UpdateSchedulingService } from "@models/Scheduling/update_scheduling_service";
+import { UpdateSchedulingService } from "../../services/Scheduling/update_scheduling_service";
 
 
 export class UpdateSchedulingController{

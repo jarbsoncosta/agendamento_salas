@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ListAllHoursRoomIdService } from "@models/Inspectorate/list_all_hous_roomId_service";
+import { ListAllHoursRoomIdService } from "../../services/Inspectorate/list_all_hous_roomId_service";
 
 
 export class ListAllHoursRoomsIdController{

@@ -1,6 +1,6 @@
 import { prisma } from "@config/prisma";
 import { Scheduling } from "@prisma/client";
-import AppError from "src/error/AppError";
+import AppError from "../../error/AppError";
 
 interface ListSchedulingOptions {
   inspectorateId: string;

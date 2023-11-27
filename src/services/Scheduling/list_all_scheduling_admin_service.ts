@@ -27,16 +27,19 @@ export class ListAllSchedulingAdminService {
         {
           nameProfissional: {
             contains: searchQueryLower, // Filtra por nome do profissional que contém a searchQuery
+            mode: "insensitive",
           },
         },
         {
           title: {
             contains: searchQueryLower, // Filtra por título que contém a searchQuery
+            mode: "insensitive",
           },
         },
         {
           emailProfissional: {
             contains: searchQueryLower, // Filtra por email que contém a searchQuery
+            mode: "insensitive",
           },
         },
         {

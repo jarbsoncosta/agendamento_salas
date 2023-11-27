@@ -1,6 +1,5 @@
 import { prisma } from "@config/prisma";
 import { Scheduling } from "@prisma/client";
-import AppError from "../../error/AppError";
 
 interface ListSchedulingOptions {
   cpfProfissional: string;
@@ -21,17 +20,18 @@ export class ListAllSchedulingService {
     };
 
     if (searchQuery) {
-      const searchQueryLower = searchQuery.toUpperCase(); // Convertendo para minúsculas
+     // const searchQueryLower = searchQuery.toLowerCase(); // Convertendo para minúsculas
 
       whereCondition.OR = [
         {
           title: {
-            contains: searchQueryLower, // Filtra por título que contém a searchQuery
+            contains: searchQuery, // Filtra por título que contém a searchQuery
+            mode: "insensitive",
           },
         },
         {
           createdAt: {
-            contains: searchQueryLower, // Filtra por data maior ou igual à searchQuery
+            contains: searchQuery, // Filtra por data maior ou igual à searchQuery
           },
         },
 

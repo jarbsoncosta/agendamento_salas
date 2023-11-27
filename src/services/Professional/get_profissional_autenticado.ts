@@ -30,8 +30,7 @@ export default autenticarProfissionalSitac.post(
       const response = await axios.get(apiUrl, { headers });
 
       // Retorna a resposta da API externa como resposta da sua rota
-      console.log(response.data)
-      res.status(response.status).json(response.data);
+    res.status(response.status).json(response.data);
     } catch (error) {
       if (error.response && error.response.status === 404) {
         // Trate o erro 404 aqui, se desejar

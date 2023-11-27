@@ -9,34 +9,34 @@ datasource db {
 
 //tabela de admnistrador
 model Admin {
-  id             String         @id @default(uuid())
+  id             String        @id @default(uuid())
   name           String
   email          String
   password       String
   schedules      Scheduling[]
-  professional   Professional[]
-  createdAt      DateTime       @default(now())
-  Inspectorate   Inspectorate?  @relation(fields: [inspectorateId], references: [id])
+  // professional   Professional[]
+  createdAt      DateTime      @default(now())
+  Inspectorate   Inspectorate? @relation(fields: [inspectorateId], references: [id])
   inspectorateId String?
 
   @@map("admin")
 }
 
-//tabela de profissional
-model Professional {
-  id                String   @id @default(uuid())
-  name              String
-  cpf               String
-  email             String
-  professionalTitle String
-  password          String
-  createdAt         DateTime @default(now())
-  adminId           String?
-  // schedules         Scheduling[]
-  Admin             Admin?   @relation(fields: [adminId], references: [id])
+// //tabela de profissional
+// model Professional {
+//   id                String   @id @default(uuid())
+//   name              String
+//   cpf               String
+//   email             String
+//   professionalTitle String
+//   password          String
+//   createdAt         DateTime @default(now())
+//   adminId           String?
+//   // schedules         Scheduling[]
+//   Admin             Admin?   @relation(fields: [adminId], references: [id])
 
-  @@map("professional")
-}
+//   @@map("professional")
+// }
 
 //tabela de inspetorias
 model Inspectorate {
@@ -80,7 +80,7 @@ model Hour {
 
 //tabela de agendamento de sala
 model Scheduling {
-  id                String   @id @default(uuid())
+  id                String    @id @default(uuid())
   title             String
   nameProfissional  String
   cpfProfissional   String
@@ -88,12 +88,12 @@ model Scheduling {
   inspectorateId    String
   hourInitial       Int
   hourFinish        Int
-  status            String   @default("Agendamento pendente")
+  status            String    @default("Agendamento pendente")
   messageStatus     String?
   adminId           String?
   roomId            String
   createdAt         String // Data do agendamento
-  createdIn         DateTime?  @default(now())
+  createdIn         DateTime? @default(now())
 
   inspectorate Inspectorate @relation(fields: [inspectorateId], references: [id])
   admin        Admin?       @relation(fields: [adminId], references: [id])

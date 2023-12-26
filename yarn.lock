@@ -2241,6 +2241,11 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
+date-fns@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.npmjs.org/date-fns/-/date-fns-3.0.5.tgz"
+  integrity sha512-Q4Tq5c5s/Zl/zbgdWf6pejn9ru7UwdIlLfvEEg1hVsQNQ7LKt76qIduagIT9OPK7+JCv1mAKherdU6bOqGYDnw==
+
 dateformat@~1.0.4-1.2.3:
   version "1.0.12"
   resolved "https://registry.npmjs.org/dateformat/-/dateformat-1.0.12.tgz"

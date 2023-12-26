@@ -18,50 +18,39 @@ model Admin {
   createdAt      DateTime      @default(now())
   Inspectorate   Inspectorate? @relation(fields: [inspectorateId], references: [id])
   inspectorateId String?
+  root           Boolean?
 
   @@map("admin")
 }
 
-// //tabela de profissional
-// model Professional {
-//   id                String   @id @default(uuid())
-//   name              String
-//   cpf               String
-//   email             String
-//   professionalTitle String
-//   password          String
-//   createdAt         DateTime @default(now())
-//   adminId           String?
-//   // schedules         Scheduling[]
-//   Admin             Admin?   @relation(fields: [adminId], references: [id])
-
-//   @@map("professional")
-// }
-
 //tabela de inspetorias
 model Inspectorate {
-  id          String       @id @default(uuid())
-  name        String
-  description String?
-  createdAt   DateTime     @default(now())
-  rooms       Room[]
-  schedules   Scheduling[]
-  admins      Admin[]
+  id                       String                     @id @default(uuid())
+  name                     String
+  description              String?
+  createdAt                DateTime                   @default(now())
+  rooms                    Room[]
+  schedules                Scheduling[]
+  admins                   Admin[]
+  tables                   Table[]
+  schedulingTables         SchedulingTable[]
+  baias                    Baia[]
+  schedulingBaias          SchedulingBaia[]
+  MesaIndividual           MesaIndividual[]
+  SchedulingMesaIndividual SchedulingMesaIndividual[]
 
   @@map("inspectorate")
 }
 
 //tabela de salas
 model Room {
-  id           String  @id @default(uuid())
-  name         String
-  description  String?
-  inspetoriaId String
-
+  id            String       @id @default(uuid())
+  name          String
+  description   String?
+  inspetoriaId  String
   inspectorates Inspectorate @relation(fields: [inspetoriaId], references: [id])
-
-  hours      Hour[]
-  scheduling Scheduling[]
+  hours         Hour[]
+  scheduling    Scheduling[]
 
   @@map("room")
 }
@@ -72,8 +61,7 @@ model Hour {
   hInitial Int?
   hFinal   Int?
   roomId   String
-
-  room Room @relation(fields: [roomId], references: [id])
+  room     Room   @relation(fields: [roomId], references: [id])
 
   @@map("hour")
 }
@@ -100,4 +88,100 @@ model Scheduling {
   room         Room         @relation(fields: [roomId], references: [id])
 
   @@map("scheduling")
+}
+
+//Tabela para agendamento das mesas e guiches
+//Mesas
+model Table {
+  id              String            @id @default(uuid())
+  number          Int
+  inspectorateId  String?
+  Inspectorate    Inspectorate?     @relation(fields: [inspectorateId], references: [id])
+  Chairs          Chair[]
+  schedulingTable SchedulingTable[]
+
+  @@map("table")
+}
+
+// Cadeiras
+model Chair {
+  id              String            @id @default(uuid())
+  number          Int
+  tableId         String?
+  status          Boolean
+  Table           Table?            @relation(fields: [tableId], references: [id])
+  schedulingTable SchedulingTable[]
+
+  @@map("chair")
+}
+
+//agendamento das mesas
+model SchedulingTable {
+  id               String        @id @default(uuid())
+  number           Int
+  tableId          String?
+  Table            Table?        @relation(fields: [tableId], references: [id])
+  nameProfissional String
+  Chair            Chair?        @relation(fields: [chairId], references: [id])
+  chairId          String?
+  Inspectorate     Inspectorate? @relation(fields: [inspectorateId], references: [id])
+  inspectorateId   String?
+  dateInitial      DateTime      @default(now())
+  dateFinal        DateTime?
+  status           Boolean?      @default(false)
+
+  @@map("schedulingTable")
+}
+
+//Baias
+model Baia {
+  id             String        @id @default(uuid())
+  number         Int
+  tableId        String? //Remover
+  status         Boolean
+  Inspectorate   Inspectorate? @relation(fields: [inspectorateId], references: [id])
+  inspectorateId String?
+
+  @@map("baia")
+}
+
+//agendamento das mesas
+model SchedulingBaia {
+  id               String        @id @default(uuid())
+  numberBaia       Int
+  nameProfissional String
+  dateInitial      DateTime      @default(now())
+  dateFinal        DateTime?
+  status           Boolean?      @default(false)
+  Inspectorate     Inspectorate? @relation(fields: [inspectorateId], references: [id])
+  inspectorateId   String?
+
+  @@map("schedulingBaia")
+}
+
+//Mesas Individuais
+model MesaIndividual {
+  id                       String                     @id @default(uuid())
+  numberMesa               Int
+  status                   Boolean
+  Inspectorate             Inspectorate?              @relation(fields: [inspectorateId], references: [id])
+  inspectorateId           String?
+  schedulingMesaIndividual SchedulingMesaIndividual[]
+
+  @@map("mesaIndividual")
+}
+
+model SchedulingMesaIndividual {
+  id               String          @id @default(uuid())
+  numberMesa       Int
+  nameProfissional String
+  dateInitial      DateTime        @default(now())
+  dateFinal        DateTime?
+  status           Boolean?        @default(false)
+  Inspectorate     Inspectorate?   @relation(fields: [inspectorateId], references: [id])
+  inspectorateId   String?
+  MesaIndividual   MesaIndividual? @relation(fields: [mesaIndividualId], references: [id])
+  mesaIndividualId String?
+
+  @@map("schedulingMesaIndividual")
 }

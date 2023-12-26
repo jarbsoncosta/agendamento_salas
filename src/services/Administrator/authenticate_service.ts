@@ -16,6 +16,7 @@ type AuthenticationResponse = {
     name: string;
     email: string; 
     inspectorateId:string  
+    root:boolean
   };
   token: string;
 };
@@ -52,8 +53,8 @@ export class AuthenticateAdminService {
 				id: admin.id,
 				name: admin.name,
 				email: admin.email,
-        inspectorateId:admin.inspectorateId
-        
+        inspectorateId:admin.inspectorateId,
+        root:admin.root       
               
 			},
 			token

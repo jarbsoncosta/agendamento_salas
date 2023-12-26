@@ -9,42 +9,7 @@ export class ShowProfessionalIdService {
         distinct 
         pf.nome, 
         pf.cpf,     
-        r.ultimoexercicioquitado,
-        r.pessoa_id,
-        situacao_registro,
-        t.titulo_profissional,     
-    CASE
-        -- Adimplente?
-        WHEN (
-            (
-                EXISTS(
-                    SELECT
-                        1
-                    FROM
-                        relatorios.tb_pessoa_parcelamento_anuidade_em_dia
-                    WHERE
-                        pessoa_id = r.pessoa_id
-                )
-                OR r.ultimoexercicioquitado IN (2022)
-            )
-            AND r.situacao_registro = 'ATIVO'
-        ) THEN 'Sim' -- Adimplente?
-        WHEN (
-            (
-                NOT EXISTS(
-                    SELECT
-                        1
-                    FROM
-                        relatorios.tb_pessoa_parcelamento_anuidade_em_dia
-                    WHERE
-                        pessoa_id = r.pessoa_id
-                )
-                OR r.ultimoexercicioquitado NOT IN (2022)
-            )
-            AND r.situacao_registro = 'ATIVO'
-        ) THEN 'Não'
-        ELSE '-'
-    END adimplente      
+        t.titulo_profissional   
     FROM
     relatorios.tb_profissional_report r
     LEFT JOIN tb_profissional_titulo pt ON r.pessoa_id = pt.pessoa_id
@@ -61,7 +26,7 @@ export class ShowProfessionalIdService {
     if (!res.rows[0]) {
       throw new AppError("Profissional não encontrado !")
     }
-    return res.rows
+    return res.rows[0]
   };
 
 }

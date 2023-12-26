@@ -8,10 +8,6 @@ import { ShowInspectorateController } from '../controllers/Inspectorate/show_Ins
 import { ShowProfessionalController } from '../controllers/Professional/show_professional_id_controller'
 import { Router } from 'express'
 import { CreateHourController } from '../controllers/Inspectorate/create_hour_controller'
-// import { ListHoursController } from '../controllers/Inspectorate/list_hours_controller'
-
-
-//import { userAuthenticate } from 'src/middlewares/userAuthenticate'
 
 const inspectorateRouter = Router()
 
@@ -23,8 +19,6 @@ inspectorateRouter.get("/rooms/:inspetoriaId", new ListAllRoomsInspectoratesCont
 //inspectorateRouter.post('/session', new AuthenticateController().handle)
 
 inspectorateRouter.get("/professional", new ShowProfessionalController().handle)
-
 inspectorateRouter.post("/hour", new CreateHourController().handle)
-
 
 export default inspectorateRouter

@@ -6,7 +6,7 @@ import { professionalAuthenticate } from '../middlewares/professionalAuthenticat
 import { ListAllSchedulingAdminController } from '../controllers/Scheduling/list_all_scheduling_contoller_admin'
 import { UpdateSchedulingController } from '../controllers/Scheduling/update_scheduling_controller'
 import { CanceLSchedulingProfessionalIdController } from '../controllers/Scheduling/cancel_scheduling_professional_id_controller copy'
-import { adminAuthenticate } from 'src/middlewares/admin_authenticate'
+import { adminAuthenticate } from '../middlewares/admin_authenticate'
 
 const schedulingRouter = Router()
 schedulingRouter.post("/",new CreateSchedulingController().handle)

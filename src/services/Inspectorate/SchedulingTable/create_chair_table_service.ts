@@ -8,6 +8,8 @@ interface DateProps {
   chairId: string;
   inspectorateId: string;
   status: boolean;
+  cpf:string;
+  tituloPrincipal:string
 }
 
 export class CreateChairInTableService {
@@ -17,6 +19,8 @@ export class CreateChairInTableService {
     number,
     tableId,
     inspectorateId,
+    cpf,
+    tituloPrincipal
   }: DateProps): Promise<SchedulingTable> {
     const resp = await prisma.schedulingTable.create({
       data: {
@@ -25,6 +29,8 @@ export class CreateChairInTableService {
         tableId,
         chairId,
         inspectorateId,
+        cpf,
+        tituloPrincipal
       },
     });
     return resp;

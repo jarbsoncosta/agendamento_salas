@@ -122,6 +122,8 @@ model SchedulingTable {
   tableId          String?
   Table            Table?        @relation(fields: [tableId], references: [id])
   nameProfissional String
+  cpf              String?
+  tituloPrincipal  String?
   Chair            Chair?        @relation(fields: [chairId], references: [id])
   chairId          String?
   Inspectorate     Inspectorate? @relation(fields: [inspectorateId], references: [id])
@@ -150,6 +152,8 @@ model SchedulingBaia {
   id               String        @id @default(uuid())
   numberBaia       Int
   nameProfissional String
+  cpf              String?
+  tituloPrincipal  String?
   dateInitial      DateTime      @default(now())
   dateFinal        DateTime?
   status           Boolean?      @default(false)
@@ -175,6 +179,8 @@ model SchedulingMesaIndividual {
   id               String          @id @default(uuid())
   numberMesa       Int
   nameProfissional String
+  cpf              String?
+  tituloPrincipal  String?
   dateInitial      DateTime        @default(now())
   dateFinal        DateTime?
   status           Boolean?        @default(false)

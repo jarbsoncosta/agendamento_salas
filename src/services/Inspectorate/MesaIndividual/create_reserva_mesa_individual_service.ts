@@ -5,7 +5,9 @@ interface DataProps {
   numberMesa: number;
   nameProfissional: string;
   inspectorateId: string;
-  mesaIndividualId:string
+  mesaIndividualId: string;
+  cpf: string;
+  tituloPrincipal: string;
 }
 
 export class CreateReservaMesaIndividualService {
@@ -13,14 +15,18 @@ export class CreateReservaMesaIndividualService {
     nameProfissional,
     numberMesa,
     inspectorateId,
-    mesaIndividualId
+    mesaIndividualId,
+    cpf,
+    tituloPrincipal,
   }: DataProps): Promise<SchedulingMesaIndividual> {
     const resp = await prisma.schedulingMesaIndividual.create({
       data: {
         nameProfissional,
         numberMesa,
         inspectorateId,
-        mesaIndividualId
+        mesaIndividualId,
+        cpf,
+        tituloPrincipal,
       },
     });
     return resp;

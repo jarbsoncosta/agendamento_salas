@@ -28,6 +28,7 @@ export default autenticarProfissionalSitac.post(
 
       // Faz a requisição à API externa
       const response = await axios.get(apiUrl, { headers });
+      console.log(response.data)
 
       // Retorna a resposta da API externa como resposta da sua rota
     res.status(response.status).json(response.data);

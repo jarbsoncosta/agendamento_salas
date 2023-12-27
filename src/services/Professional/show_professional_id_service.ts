@@ -9,7 +9,7 @@ export class ShowProfessionalIdService {
         distinct 
         pf.nome, 
         pf.cpf,     
-        t.titulo_profissional   
+        t.titulo_profissional as titulo_principal   
     FROM
     relatorios.tb_profissional_report r
     LEFT JOIN tb_profissional_titulo pt ON r.pessoa_id = pt.pessoa_id

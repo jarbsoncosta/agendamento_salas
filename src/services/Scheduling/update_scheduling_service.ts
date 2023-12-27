@@ -62,6 +62,7 @@ export class UpdateSchedulingService {
       emailContent = `Seu agendamento foi reprovado, pelo seguinte motivo : ${response.messageStatus}`;
     }
 
+    console.log(emailProfissional)
   try {
     const transporter = await nodemailer.createTransport({
       host: process.env.MAIL_HOST,
@@ -71,10 +72,13 @@ export class UpdateSchedulingService {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS,
       },
+      tls: {
+        rejectUnauthorized: false
+    }
     });
     const message = {
       from: {
-        address: "sender@example.com",
+        address: "agendamento.coworking@crea-rn.org.br",
         name: "Mailtrap Test",
       },
       to: {

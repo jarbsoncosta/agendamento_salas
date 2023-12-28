@@ -54,15 +54,24 @@ export class UpdateSchedulingService {
       hourInitial,     
     } = scheduling;
 
-
+    //formatar data
+    function formatarData(dataCompleta) {
+      // Dividir a string da data nos espaços
+      const partes = dataCompleta.split(' ');
+  
+      // A parte desejada é a primeira parte (índice 0)
+      const data = partes[0];
+  
+      return data;
+  }
     let emailContent = "";
     if (response.status === "Agendamento confirmado") {
-      emailContent = `Seu agendamento foi confirmado, no CREA ${scheduling.inspectorate.name}, sala ${scheduling.room.name} no dia ${response.createdAt} e horário ${hourInitial}hs as ${hourFinish}hs`;
+      emailContent = `Seu agendamento foi confirmado, no CREA ${scheduling.inspectorate.name}, sala ${scheduling.room.name} no dia ${formatarData(response.createdAt)} e horário ${hourInitial}hs as ${hourFinish}hs`;
     } else {
       emailContent = `Seu agendamento foi reprovado, pelo seguinte motivo : ${response.messageStatus}`;
     }
 
-  
+console.log(formatarData(response.createdAt))
   try {
     const transporter = await nodemailer.createTransport({
       host: process.env.MAIL_HOST,

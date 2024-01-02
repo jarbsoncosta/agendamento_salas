@@ -13,6 +13,7 @@ model Admin {
   name           String
   email          String
   password       String
+  idTelegran     String?
   schedules      Scheduling[]
   // professional   Professional[]
   createdAt      DateTime      @default(now())
@@ -68,20 +69,21 @@ model Hour {
 
 //tabela de agendamento de sala
 model Scheduling {
-  id                String    @id @default(uuid())
-  title             String
-  nameProfissional  String
-  cpfProfissional   String
-  emailProfissional String?
-  inspectorateId    String
-  hourInitial       Int
-  hourFinish        Int
-  status            String    @default("Agendamento pendente")
-  messageStatus     String?
-  adminId           String?
-  roomId            String
-  createdAt         String // Data do agendamento
-  createdIn         DateTime? @default(now())
+  id                          String    @id @default(uuid())
+  title                       String
+  nameProfissional            String
+  cpfProfissional             String
+  tituloPrincipalProfissional String?
+  emailProfissional           String?
+  inspectorateId              String
+  hourInitial                 Int
+  hourFinish                  Int
+  status                      String    @default("Agendamento pendente")
+  messageStatus               String?
+  adminId                     String?
+  roomId                      String
+  createdAt                   String // Data do agendamento
+  createdIn                   DateTime? @default(now())
 
   inspectorate Inspectorate @relation(fields: [inspectorateId], references: [id])
   admin        Admin?       @relation(fields: [adminId], references: [id])

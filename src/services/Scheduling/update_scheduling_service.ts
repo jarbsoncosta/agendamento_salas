@@ -66,12 +66,12 @@ export class UpdateSchedulingService {
   }
     let emailContent = "";
     if (response.status === "Agendamento confirmado") {
-      emailContent = `Seu agendamento foi confirmado, no CREA ${scheduling.inspectorate.name}, sala ${scheduling.room.name} no dia ${formatarData(response.createdAt)} e horário ${hourInitial}hs as ${hourFinish}hs`;
+      emailContent = `Seu agendamento foi confirmado no  ${scheduling.inspectorate.name}, sala ${scheduling.room.name} no dia ${formatarData(response.createdAt)} e horário ${hourInitial}hs as ${hourFinish}hs`;
     } else {
       emailContent = `Seu agendamento foi reprovado, pelo seguinte motivo : ${response.messageStatus}`;
     }
 
-console.log(formatarData(response.createdAt))
+
   try {
     const transporter = await nodemailer.createTransport({
       host: process.env.MAIL_HOST,

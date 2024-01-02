@@ -1,6 +1,7 @@
-import { prisma } from '@config/prisma';
-import { Scheduling } from '@prisma/client';
-import AppError from '../../error/AppError';
+import { prisma } from "@config/prisma";
+import { Scheduling } from "@prisma/client";
+import AppError from "../../error/AppError";
+import { envioMensagemBotTelegran } from "@config/bot_telegran";
 
 interface SchedulingProps {
   title: string;
@@ -13,7 +14,8 @@ interface SchedulingProps {
   status: string;
   createdAt: string;
   messageStatus: string;
-  emailProfissional:string
+  emailProfissional: string;
+  tituloPrincipalProfissional: string;
 }
 
 export class CreateSchedulingService {
@@ -29,7 +31,9 @@ export class CreateSchedulingService {
     roomId,
     status,
     messageStatus,
+    tituloPrincipalProfissional,
   }: SchedulingProps): Promise<Scheduling> {
+    // const bot = new Telegraf("6646354850:AAHtL08je66VgrkZ3oevHtGbYO-q-J0y8W8");
     const existingSchedules = await prisma.scheduling.findMany({
       where: {
         createdAt: createdAt,
@@ -38,13 +42,18 @@ export class CreateSchedulingService {
     });
 
     for (let i = 0; i < existingSchedules.length; i++) {
-      const { hourInitial: existingInitial, hourFinish: existingFinish } = existingSchedules[i];
-    
+      const {
+        hourInitial: existingInitial,
+        hourFinish: existingFinish,
+      } = existingSchedules[i];
+
       // Verifica se o novo agendamento começa durante um agendamento existente
       if (hourInitial >= existingInitial && hourInitial < existingFinish) {
-        throw new AppError(`Já existe um agendamento para esta sala no horário de ${existingInitial}h às ${existingFinish}h.`);
+        throw new AppError(
+          `Já existe um agendamento para esta sala no horário de ${existingInitial}h às ${existingFinish}h.`
+        );
       }
-    
+
       // Verifica se o novo agendamento começa imediatamente após um agendamento existente
       if (hourInitial === existingFinish) {
         // Se houver um próximo agendamento
@@ -52,13 +61,13 @@ export class CreateSchedulingService {
           const nextExistingInitial = existingSchedules[i + 1].hourInitial;
           // Se o próximo agendamento começar imediatamente após este agendamento e houver menos de 1 hora de intervalo, bloqueie o agendamento
           if (nextExistingInitial - hourFinish < 1) {
-            throw new AppError(`Já existe um agendamento neste intervalo. O próximo agendamento deve começar após as ${hourFinish}h.`);
+            throw new AppError(
+              `Já existe um agendamento neste intervalo. O próximo agendamento deve começar após as ${hourFinish}h.`
+            );
           }
         }
       }
     }
-    
-    
 
     const scheduling = await prisma.scheduling.create({
       data: {
@@ -73,8 +82,12 @@ export class CreateSchedulingService {
         roomId,
         status,
         messageStatus,
+        tituloPrincipalProfissional,
       },
     });
+
+     envioMensagemBotTelegran(scheduling.id)
+       
     return scheduling;
   }
 }

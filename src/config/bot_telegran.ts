@@ -51,6 +51,7 @@ export async function envioMensagemBotTelegran(inspectorateId) {
         Existe um agendamento pendente para o Coworking ${data?.inspectorate.name}
        
         * Profissional: ${data.nameProfissional}
+        * Título: ${data.tituloPrincipalProfissional}
         * Data: ${formatarData(data.createdAt)}
         * Sala: ${data.room.name}
         * Horário: ${data.hourInitial}hs as ${data.hourFinish}hs

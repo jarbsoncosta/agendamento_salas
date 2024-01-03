@@ -22,8 +22,8 @@ export class ListBaiasService {
     });
 
     // Divida o array em duas partes
-    const primeiraParte = result.slice(0, 7);
-    const segundaParte = result.slice(7, 14);
+    const primeiraParte = result.slice(7, 14);
+    const segundaParte = result.slice(0, 7);
 
     // Inverta a primeira parte
     const primeiraParteInvertida = primeiraParte.reverse();

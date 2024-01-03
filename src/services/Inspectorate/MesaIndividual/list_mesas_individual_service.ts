@@ -7,7 +7,7 @@ export class ListMesasIndividuaisService {
   async execute(inspectorateId:string): Promise<MesaIndividual[]> {
     const result = await prisma.mesaIndividual.findMany({
       orderBy:{
-        numberMesa:'desc'
+        numberMesa:'asc'
       },
       where:{
         inspectorateId

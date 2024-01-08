@@ -16,6 +16,12 @@ interface SchedulingProps {
   messageStatus: string;
   emailProfissional: string;
   tituloPrincipalProfissional: string;
+  convidados?: Convidados[];
+}
+
+interface Convidados {
+  nome: string;
+  cpf: string;
 }
 
 export class CreateSchedulingService {
@@ -32,14 +38,22 @@ export class CreateSchedulingService {
     status,
     messageStatus,
     tituloPrincipalProfissional,
+    convidados
   }: SchedulingProps): Promise<Scheduling> {
-    // const bot = new Telegraf("6646354850:AAHtL08je66VgrkZ3oevHtGbYO-q-J0y8W8");
+
+    //Listar o termo de ciencia que está ativp
+   const responseTerm = await prisma.termoCiencia.findFirst({
+    where:{
+      active:true
+    },     
+  })
+    
     const existingSchedules = await prisma.scheduling.findMany({
       where: {
         createdAt: createdAt,
         roomId: roomId,
       },
-    });
+    })
 
     for (let i = 0; i < existingSchedules.length; i++) {
       const {
@@ -83,11 +97,27 @@ export class CreateSchedulingService {
         status,
         messageStatus,
         tituloPrincipalProfissional,
+        termoCienciaId:responseTerm.id
       },
     });
 
-     envioMensagemBotTelegran(scheduling.id)
+    for (const pessoa of convidados) {
+      try {
+         await prisma.convidado.create({
+          data: {
+            nome: pessoa.nome,
+            cpf: pessoa.cpf,
+            schedulingId:scheduling.id
+          },
+        });
        
+      } catch (erro) {
+        console.error(`Erro ao salvar os convidados: ${erro.message}`);
+      }
+    }
+
+    envioMensagemBotTelegran(scheduling.id);
+
     return scheduling;
   }
 }

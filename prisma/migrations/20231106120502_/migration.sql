@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "scheduling" ALTER COLUMN "createdIn" SET DEFAULT CURRENT_TIMESTAMP;

@@ -1,5 +1,4 @@
 import { prisma } from "@config/prisma";
-import { Scheduling } from "@prisma/client";
 import AppError from "../../error/AppError";
 
 interface ListSchedulingOptions {
@@ -10,7 +9,7 @@ interface ListSchedulingOptions {
 
 
 export class ListAllSchedulingAdminService {
-  async execute(options:ListSchedulingOptions): Promise<Scheduling[]> {
+  async execute(options:ListSchedulingOptions): Promise<any> {
     const { inspectorateId, searchQuery, page } = options;
     const pageSize = 5;
     const pageNumber = parseInt(String(page), 5) || 1;
@@ -66,7 +65,9 @@ export class ListAllSchedulingAdminService {
       include: {
         inspectorate: true,
         room: true,
+        convidados:true
       },
+
     });
 
 

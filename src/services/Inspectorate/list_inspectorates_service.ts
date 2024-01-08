@@ -6,7 +6,11 @@ import { Inspectorate } from '@prisma/client';
 
 export class ListInspectoratesService {
   async execute(): Promise<Inspectorate[]> {
-    const inspectorates = await prisma.inspectorate.findMany()
+    const inspectorates = await prisma.inspectorate.findMany({
+      include:{
+        datasRestritas:true
+      }
+    })
     return inspectorates
   }
 }

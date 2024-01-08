@@ -16,7 +16,7 @@ export class ListAllRoomsInspectoratesService {
       where: {
         inspetoriaId
       },
-     
+      
     })
     return rooms
   }

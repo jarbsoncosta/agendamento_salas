@@ -39,6 +39,7 @@ model Inspectorate {
   schedulingBaias          SchedulingBaia[]
   MesaIndividual           MesaIndividual[]
   SchedulingMesaIndividual SchedulingMesaIndividual[]
+  datasRestritas           DatasRestritas[]
 
   @@map("inspectorate")
 }
@@ -49,6 +50,7 @@ model Room {
   name          String
   description   String?
   inspetoriaId  String
+  qtdPlaces     Int? //Lugares na sala
   inspectorates Inspectorate @relation(fields: [inspetoriaId], references: [id])
   hours         Hour[]
   scheduling    Scheduling[]
@@ -85,9 +87,13 @@ model Scheduling {
   createdAt                   String // Data do agendamento
   createdIn                   DateTime? @default(now())
 
-  inspectorate Inspectorate @relation(fields: [inspectorateId], references: [id])
-  admin        Admin?       @relation(fields: [adminId], references: [id])
-  room         Room         @relation(fields: [roomId], references: [id])
+  inspectorate   Inspectorate  @relation(fields: [inspectorateId], references: [id])
+  admin          Admin?        @relation(fields: [adminId], references: [id])
+  room           Room          @relation(fields: [roomId], references: [id])
+  TermoCiencia   TermoCiencia? @relation(fields: [termoCienciaId], references: [id])
+  termoCienciaId String?
+
+  convidados Convidado[]
 
   @@map("scheduling")
 }
@@ -192,4 +198,37 @@ model SchedulingMesaIndividual {
   mesaIndividualId String?
 
   @@map("schedulingMesaIndividual")
+}
+
+//Termo Ciencia
+model TermoCiencia {
+  id           String       @id @default(uuid())
+  versao       String
+  conteudoHtml String
+  creatdAt     DateTime     @default(now())
+  active       Boolean      @default(false)
+  scheduling   Scheduling[]
+
+  @@map("termoCiencia")
+}
+
+//Convidados para a reunião
+model Convidado {
+  id           String      @id @default(uuid())
+  nome         String
+  cpf          String
+  Scheduling   Scheduling? @relation(fields: [schedulingId], references: [id])
+  schedulingId String?
+
+  @@map("convidado")
+}
+
+// Restrinção de datas
+model DatasRestritas {
+  id             String        @id @default(uuid())
+  data           String
+  Inspectorate   Inspectorate? @relation(fields: [inspectorateId], references: [id])
+  inspectorateId String?
+
+  @@map("datasRestritas")
 }

@@ -1,4 +1,0 @@
--- AlterTable
-ALTER TABLE "schedulingTable" ADD COLUMN     "dateFinal" TIMESTAMP(3),
-ADD COLUMN     "dateInitial" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-ADD COLUMN     "status" BOOLEAN DEFAULT false;

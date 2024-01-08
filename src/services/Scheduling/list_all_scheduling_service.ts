@@ -49,7 +49,7 @@ export class ListAllSchedulingService {
         room: true,
       },
       orderBy:{
-        createdIn:"desc"
+        createdIn:"desc",
       }
       
     });

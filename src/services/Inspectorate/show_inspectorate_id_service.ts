@@ -16,6 +16,7 @@ export class ShowInspectorateIdService {
             hours:true
           }
         },
+        datasRestritas:true
 
       }
     })

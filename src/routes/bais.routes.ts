@@ -4,7 +4,7 @@ import { ListBaiasController } from '../controllers/Inspectorate/Baia/list_baias
 import { CreateReservaBaiaController } from '../controllers/Inspectorate/Baia/create_reserva_baia_controller'
 import { ListReservasController } from '../controllers/Inspectorate/Baia/list_reservas_baias_controller'
 import { UpdataStatusReservaBaiaController } from '../controllers/Inspectorate/Baia/update_status_baia_controller'
-import { adminAuthenticate } from 'src/middlewares/admin_authenticate'
+import { adminAuthenticate } from '../middlewares/admin_authenticate'
 
 
 const baiaRouter = Router()

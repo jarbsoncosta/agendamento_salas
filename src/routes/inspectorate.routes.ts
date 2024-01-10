@@ -7,7 +7,7 @@ import { ShowProfessionalController } from "../controllers/Professional/show_pro
 import { Router } from "express";
 import { CreateHourController } from "../controllers/Inspectorate/create_hour_controller";
 import { CreateDataRestricaoController } from "../controllers/Inspectorate/create_restricao_data_controller";
-import { adminAuthenticate } from "src/middlewares/admin_authenticate";
+import { adminAuthenticate } from "../middlewares/admin_authenticate";
 
 const inspectorateRouter = Router();
 

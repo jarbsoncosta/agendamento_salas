@@ -6,7 +6,7 @@ import { ListTablesController } from '../controllers/Inspectorate/Table/list_tab
 
 import { Router } from 'express'
 import { UpdataStatusSchedulingTableController } from '../controllers/SchedulingTable/update_status_table_controller'
-import { adminAuthenticate } from 'src/middlewares/admin_authenticate'
+import { adminAuthenticate } from '../middlewares/admin_authenticate'
 
 
 const tableRouter = Router()

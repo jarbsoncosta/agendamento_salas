@@ -4,7 +4,7 @@ import { ListMesasIndividuaisController } from '../controllers/Inspectorate/Mesa
 import { CreateReservaMesaIndividualController } from '../controllers/Inspectorate/MesaIndividual/create_reserva_baia_controller'
 import { ListReservasMesasIndividuaisController } from '../controllers/Inspectorate/MesaIndividual/list_reservas_mesas_individuais_controller'
 import { UpdataStatusReservaMesaIndividualController } from '../controllers/Inspectorate/MesaIndividual/update_status_reserva_mesa_individual_controller'
-import { adminAuthenticate } from 'src/middlewares/admin_authenticate'
+import { adminAuthenticate } from '../middlewares/admin_authenticate'
 
 
 const mesaIndividualRouter = Router()

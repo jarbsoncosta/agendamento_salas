@@ -6,6 +6,7 @@ import { UpdateSchedulingController } from "../controllers/Scheduling/update_sch
 import { adminAuthenticate } from "../middlewares/admin_authenticate";
 import { CreateTermScienceController } from "../controllers/Scheduling/create_term_science_controller";
 import { ListAllTermScienceActiveController } from "../controllers/Scheduling/list_term_active_contoller";
+import { UpdateDadosConvidadoController } from "../controllers/Scheduling/update_dados_convidado_controller";
 
 
 const schedulingRouter = Router();
@@ -28,5 +29,6 @@ schedulingRouter.all(
 );
 schedulingRouter.post("/create_term", new CreateTermScienceController().handle);
 
+schedulingRouter.put("/convidado/:convidadoId", new UpdateDadosConvidadoController().handle);
 
 export default schedulingRouter;

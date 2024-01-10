@@ -4,8 +4,7 @@ import { MesaIndividual } from "@prisma/client";
 interface DataTable {
   numberMesa: number;
   inspectorateId: string;
-  status: boolean;
-  
+  status: boolean;  
 }
 
 //Serviço para criação de mesa individual

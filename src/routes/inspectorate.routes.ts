@@ -31,4 +31,5 @@ inspectorateRouter.post(
   new CreateDataRestricaoController().handle
 );
 
+
 export default inspectorateRouter;

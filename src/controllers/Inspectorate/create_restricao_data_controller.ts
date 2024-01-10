@@ -4,10 +4,10 @@ import { CreateDataRestricaoService } from "../../services/Inspectorate/create_r
 
 export class CreateDataRestricaoController {
   async handle(request: Request, response: Response) {
-    const {inspectorateId,data} = request.body
+    const {array} = request.body
    
     const service = new CreateDataRestricaoService()
-    const res = await service.execute(inspectorateId,data)
+    const res = await service.execute(array)
     return response.status(201).json(res)
   }
 }

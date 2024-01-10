@@ -217,6 +217,7 @@ model Convidado {
   id           String      @id @default(uuid())
   nome         String
   cpf          String
+  status       Boolean?
   Scheduling   Scheduling? @relation(fields: [schedulingId], references: [id])
   schedulingId String?
 
@@ -227,6 +228,7 @@ model Convidado {
 model DatasRestritas {
   id             String        @id @default(uuid())
   data           String
+  descricao      String?
   Inspectorate   Inspectorate? @relation(fields: [inspectorateId], references: [id])
   inspectorateId String?
 

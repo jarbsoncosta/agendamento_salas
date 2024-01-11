@@ -14,7 +14,7 @@ export class ListAllRoomsInspectoratesService {
     }
     const rooms = await prisma.room.findMany({
       where: {
-        inspetoriaId
+        inspetoriaId,        
       },
       
     })

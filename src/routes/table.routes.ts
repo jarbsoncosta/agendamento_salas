@@ -12,11 +12,11 @@ import { adminAuthenticate } from '../middlewares/admin_authenticate'
 const tableRouter = Router()
 //Rota para criar mesas e cadeiras
 tableRouter.get("/list/:inspectorateId", new ListTablesController().handle)
-tableRouter.post("/criar_mesa", adminAuthenticate, new CreateTableController().handle)
-tableRouter.post("/criar_cadeira", adminAuthenticate, new CreateChairController().handle)
+tableRouter.post("/criar_mesa", new CreateTableController().handle)
+tableRouter.post("/criar_cadeira", new CreateChairController().handle)
 
-tableRouter.post("/agendar_lugar_mesa", adminAuthenticate, new CreateChairInTableController().handle)
-tableRouter.put("/agendamento/status/:id", adminAuthenticate, new UpdataStatusSchedulingTableController().handle)
+tableRouter.post("/agendar_lugar_mesa", new CreateChairInTableController().handle)
+tableRouter.put("/agendamento/status/:id", new UpdataStatusSchedulingTableController().handle)
 
 
 export default tableRouter

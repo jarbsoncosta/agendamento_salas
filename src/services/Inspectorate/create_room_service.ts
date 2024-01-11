@@ -16,7 +16,8 @@ export class CreateRoomService {
       data:{
         name,
         description,
-        inspetoriaId
+        inspetoriaId,
+        active:true
       }
     })
     return room

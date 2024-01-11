@@ -11,9 +11,9 @@ const baiaRouter = Router()
 //Rota para criar mesas e cadeiras
 baiaRouter.get("/list/:inspectorateId", new ListBaiasController().handle)
 baiaRouter.get("/list_reservas/:inspectorateId", new ListReservasController().handle)
-baiaRouter.post("/criar_baia", adminAuthenticate, new CreateBaiaController().handle)
-baiaRouter.post("/criar_reserva_baia", adminAuthenticate, new CreateReservaBaiaController().handle)
-baiaRouter.put("/reserva/status/:id", adminAuthenticate, new UpdataStatusReservaBaiaController().handle)
+baiaRouter.post("/criar_baia", new CreateBaiaController().handle)
+baiaRouter.post("/criar_reserva_baia", new CreateReservaBaiaController().handle)
+baiaRouter.put("/reserva/status/:id", new UpdataStatusReservaBaiaController().handle)
 
 
 export default baiaRouter

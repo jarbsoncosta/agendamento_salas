@@ -53,6 +53,7 @@ model Room {
   qtdPlaces     Int? //Lugares na sala
   inspectorates Inspectorate @relation(fields: [inspetoriaId], references: [id])
   hours         Hour[]
+  active        Boolean?
   scheduling    Scheduling[]
 
   @@map("room")

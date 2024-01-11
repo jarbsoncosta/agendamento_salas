@@ -25,7 +25,7 @@ inspectorateRouter.get(
   "/professional",
   new ShowProfessionalController().handle
 );
-inspectorateRouter.post("/hour", adminAuthenticate, new CreateHourController().handle);
+inspectorateRouter.post("/hour", new CreateHourController().handle);
 
 inspectorateRouter.post(
   "/restricao/data",

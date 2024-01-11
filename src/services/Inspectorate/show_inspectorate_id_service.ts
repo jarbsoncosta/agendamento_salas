@@ -14,6 +14,9 @@ export class ShowInspectorateIdService {
         rooms: {
           include:{
             hours:true
+          },
+          orderBy: {
+            name: 'asc' // 'asc' para ordenação ascendente, 'desc' para descendente
           }
         },
         datasRestritas:true

@@ -1,6 +1,6 @@
 import { prisma } from "@config/prisma";
 import AppError from "../../error/AppError";
-import { formatarCPF } from "src/utils/formatCpf";
+import { formatarCPF } from "../../utils/formatCpf";
 const nodemailer = require("nodemailer");
 
 interface SchedulingProps {

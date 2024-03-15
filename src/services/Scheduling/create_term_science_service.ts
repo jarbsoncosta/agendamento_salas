@@ -1,24 +1,36 @@
 import { prisma } from "@config/prisma";
 import { TermoCiencia } from "@prisma/client";
+import fs from 'fs';
 
-interface SchedulingProps {
-  conteudoHtml: string;
-  versao: string;
-}
-
+type UploadedFile = Express.Multer.File;
 export class CreateTermScienceService {
-  async execute({
-    conteudoHtml,
-    versao,
-  }: SchedulingProps): Promise<TermoCiencia> {
-   const response = await prisma.termoCiencia.create({
-     data:{
-        conteudoHtml,
-        versao
-     }
-    });
+    async execute(name: string, versao: string, file: UploadedFile): Promise<TermoCiencia> {
+        // Verifica se o arquivo foi enviado corretamente
+        if (!file || !file.buffer) {
+            throw new Error('Arquivo não recebido ou buffer do arquivo vazio');
+        }
 
-    return response
-  }
+        const { originalname, buffer } = file;
 
+        const fileName = `${Date.now()}-${originalname}`;
+        const filePath = `uploads/${fileName}`;
+
+        try {
+            fs.writeFileSync(filePath, buffer);
+        } catch (error) {
+            console.error('Erro ao escrever arquivo no disco:', error);
+            throw new Error('Falha ao escrever arquivo no disco');
+        }
+
+        const updatedDocument = await prisma.termoCiencia.create({
+            data: {
+                name,
+                path: filePath,
+                filename: fileName,
+                versao
+            }
+        });
+
+        return updatedDocument;
+    }
 }

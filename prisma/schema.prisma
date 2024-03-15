@@ -203,12 +203,14 @@ model SchedulingMesaIndividual {
 
 //Termo Ciencia
 model TermoCiencia {
-  id           String       @id @default(uuid())
-  versao       String
-  conteudoHtml String
-  creatdAt     DateTime     @default(now())
-  active       Boolean      @default(false)
-  scheduling   Scheduling[]
+  id         String       @id @default(uuid())
+  name       String?
+  versao     String?
+  path       String?
+  filename   String?
+  creatdAt   DateTime     @default(now())
+  active     Boolean      @default(false)
+  scheduling Scheduling[]
 
   @@map("termoCiencia")
 }

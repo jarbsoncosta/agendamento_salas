@@ -7,6 +7,12 @@ import { adminAuthenticate } from "../middlewares/admin_authenticate";
 import { CreateTermScienceController } from "../controllers/Scheduling/create_term_science_controller";
 import { ListAllTermScienceActiveController } from "../controllers/Scheduling/list_term_active_contoller";
 import { UpdateDadosConvidadoController } from "../controllers/Scheduling/update_dados_convidado_controller";
+import multer from "multer"; // Importe o multer
+
+// Configurar o multer para armazenar os arquivos em memória
+const upload = multer({
+  storage: multer.memoryStorage()
+});
 
 
 const schedulingRouter = Router();
@@ -27,7 +33,8 @@ schedulingRouter.all(
   "/list_term",
   new ListAllTermScienceActiveController().handle
 );
-schedulingRouter.post("/create_term", new CreateTermScienceController().handle);
+// Rota para criar termo de ciência com upload de arquivo
+schedulingRouter.post("/create_term", upload.single('file'), new CreateTermScienceController().handle);
 
 schedulingRouter.put("/convidado/:convidadoId", new UpdateDadosConvidadoController().handle);
 

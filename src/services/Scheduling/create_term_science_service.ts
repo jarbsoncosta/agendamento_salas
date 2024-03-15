@@ -4,7 +4,7 @@ import fs from 'fs';
 
 type UploadedFile = Express.Multer.File;
 export class CreateTermScienceService {
-    async execute(name: string, versao: string, file: UploadedFile): Promise<TermoCiencia> {
+    async execute( versao: string, file: UploadedFile): Promise<TermoCiencia> {
         // Verifica se o arquivo foi enviado corretamente
         if (!file || !file.buffer) {
             throw new Error('Arquivo não recebido ou buffer do arquivo vazio');
@@ -24,9 +24,7 @@ export class CreateTermScienceService {
 
         const updatedDocument = await prisma.termoCiencia.create({
             data: {
-                name,
-                path: filePath,
-                filename: fileName,
+                name: originalname,
                 versao
             }
         });

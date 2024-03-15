@@ -4,7 +4,6 @@ import { CreateTermScienceService } from "../../services/Scheduling/create_term_
 export class CreateTermScienceController {
     async handle(req: Request, res: Response): Promise<void> {
         try {
-            const name: string = req.body.name; 
             const versao: string = req.body.versao;
             const file = req.file;
 
@@ -14,7 +13,7 @@ export class CreateTermScienceController {
             }
             
             const createTermScienceService = new CreateTermScienceService(); 
-            const updatedDocument = await createTermScienceService.execute(name, versao, file); 
+            const updatedDocument = await createTermScienceService.execute(versao, file); 
             
             res.json(updatedDocument);
         } catch (error) {

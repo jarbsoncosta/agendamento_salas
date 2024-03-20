@@ -27,6 +27,7 @@ export async function envioMensagemBotTelegran(inspectorateId) {
   const idAdminTelegram = await prisma.admin.findFirst(({
     where:{
       inspectorateId:data.inspectorateId,
+      notification:true,
     idTelegran:{
       not: null
     }   

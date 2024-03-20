@@ -14,6 +14,7 @@ model Admin {
   email          String
   password       String
   idTelegran     String?
+  notification   Boolean?
   schedules      Scheduling[]
   // professional   Professional[]
   createdAt      DateTime      @default(now())
@@ -163,7 +164,7 @@ model SchedulingBaia {
   nameProfissional String
   cpf              String?
   tituloPrincipal  String?
-  dateInitial      DateTime      @default(now())
+  dateInitial      DateTime      @default(now()) @db.Timestamp()
   dateFinal        DateTime?
   status           Boolean?      @default(false)
   Inspectorate     Inspectorate? @relation(fields: [inspectorateId], references: [id])

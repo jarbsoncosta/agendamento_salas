@@ -62,6 +62,9 @@ export class ListAllSchedulingAdminService {
       where:whereCondition,
       skip: skip >= 0 ? skip : 0,
       take: pageSize,
+      orderBy: {
+        createdIn: 'desc', //  Ordena por data de criação, do mais recente para o mais antigo
+      },
       include: {
         inspectorate: true,
         room: true,
